@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Menu from './Components/Menus/Menu';
 import rutas from './route.config';
+import configurarValidaciones from './Validaciones';
+configurarValidaciones();
 
 function App() {
   
