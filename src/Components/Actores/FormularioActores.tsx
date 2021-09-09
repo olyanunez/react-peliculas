@@ -6,6 +6,7 @@ import actorCrearDTO from "./Actor.model";
 import * as Yup from "yup";
 import FormGroupFecha from "../Utils/FormGroupFecha";
 import FormGroupImagen from "../Utils/FormGroupImagen";
+import FormGroupMarkDown from "../Utils/FormGroupMarkDown";
 
 export default function FormularioActores(props: formularioActoresProps){
 
@@ -24,7 +25,7 @@ export default function FormularioActores(props: formularioActoresProps){
                         <Input name="nombre" label="Nombre"/>
                         <FormGroupFecha label="Fecha de Nacimiento" name="fechaNacimiento" />
                         <FormGroupImagen name="foto" label="Foto" imagenURL={props.modelo.fotoUrl}/>
-
+                        <FormGroupMarkDown name="biografia" label ="Biografia"/>
 
                         <Button disabled={formikProps.isSubmitting} type="submit">Guardar</Button>
                         <Link className="btn btn-secondary" to="/actores">Cancelar</Link>

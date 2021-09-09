@@ -21,5 +21,4 @@ interface InputProps{
     label?: string;
     placeHolder?: string;
     ref?: any;
-
 }
