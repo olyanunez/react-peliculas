@@ -1,7 +1,7 @@
 import { Formik, Form, FormikHelpers } from "formik";
 import { Link } from "react-router-dom";
 import Button from "../Utils/Button";
-import Input from "../Utils/Input";
+import FormGroupTextBox from "../Utils/FormGroupTextBox";
 import * as Yup from 'yup';
 import { generoCreacionDTO } from "./generos.model";
 
@@ -28,7 +28,7 @@ export default function FormularioGeneros(props: formularioGenerosProps){
             >
                 {(formikProps) => (
                     <Form>
-                        <Input name="nombre" label="Nombre" place-holder="Nombre genero"/>
+                        <FormGroupTextBox name="nombre" label="Nombre" place-holder="Nombre genero"/>
                         <Button disabled = {formikProps.isSubmitting} type="submit">Guardar</Button>
                         <Link className="btn btn-secondary " to="/generos">Cancelar</Link>
                     </Form>

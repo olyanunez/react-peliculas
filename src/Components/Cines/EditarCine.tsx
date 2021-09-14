@@ -9,7 +9,7 @@ export default function EditarCine(){
     return(
         <>
             <h3>Editar Cine</h3>
-            <FormularioCines modelo ={{nombre: ""}} onSubmit={valores => crearCine(valores)}/>
+            <FormularioCines modelo ={{nombre: "Sambil", latitud:18.48232156144799, longitud: -69.91219520586122}} onSubmit={valores => crearCine(valores)}/>
         </>
     )
 }

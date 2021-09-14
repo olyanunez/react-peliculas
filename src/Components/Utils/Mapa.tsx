@@ -1,14 +1,14 @@
-import { MapContainer, TileLayer, useMapEvent } from "react-leaflet"
-import L, { Marker } from 'leaflet'
+import { MapContainer, TileLayer, useMapEvent, Marker } from "react-leaflet"
+import L from 'leaflet'
 import icon from 'leaflet/dist/images/marker-icon.png'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 import 'leaflet/dist/leaflet.css'
-import CoordenadasDTO from "./CoordenadasDTO"
+import CoordenadaDTO from "./coordenadas.model"
 import { useState } from "react"
 
 export default function Mapa(props: mapaProps){
     
-    const [coordenadas, setCoordenadas] = useState<CoordenadasDTO[]>([]);
+    const [coordenadas, setCoordenadas] = useState<CoordenadaDTO[]>(props.coordenadas);
     let DefaultIcon = L.icon({
         iconUrl: icon,
         shadowUrl: iconShadow,
@@ -29,36 +29,42 @@ export default function Mapa(props: mapaProps){
                 <ClickMapa 
                     setPunto = { coordenadas => {
                         setCoordenadas([coordenadas])
+                        props.manejarClickMapa(coordenadas)
                     }}
                 />
-                {coordenadas.map(coordenada => <Marcador key={[coordenada.latitud, coordenada.longitud]}/>)}
+                {/* Para un unico marcador */}
+                {/* <Marker position={[111,-93]}/> */}
+
+                {/* Para varios marcadores */}
+                {coordenadas.map(coordenada => <Marcador key={coordenada.lat + coordenada.lng} {...coordenada}/>)}
             </MapContainer>
     )
 }
 
 function ClickMapa(props: clickMapaProps){
     useMapEvent('click', e => {
-        props.setPunto({latitud: e.latlng.lat, longitud: e.latlng.lng})
+        props.setPunto({lat: e.latlng.lat, lng: e.latlng.lng})
     })
 
     return null;
 }
 
 interface clickMapaProps{
-    setPunto(coordenadas: CoordenadasDTO): void;
+    setPunto(coordenadas: CoordenadaDTO): void;
 }
 
-function Marcador(props: CoordenadasDTO){
-    
+function Marcador(props: CoordenadaDTO){
     return(
         <>
-            <Marker position={[props.longitud, props.latitud]} />
+            <Marker position={[props.lat,props.lng]}/>
         </>
     )
 }
 
 interface mapaProps{
     height: string;
+    coordenadas: CoordenadaDTO[];
+    manejarClickMapa(coordenadas: CoordenadaDTO): void;
 }
 
 Mapa.defaultProps = {

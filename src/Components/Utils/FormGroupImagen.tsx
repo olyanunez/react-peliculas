@@ -66,5 +66,5 @@ interface formGroupImagenProps{
 }
 
 FormGroupImagen.defaultProps ={
-    imagenUrl: ''
+    imagenURL: ''
 }

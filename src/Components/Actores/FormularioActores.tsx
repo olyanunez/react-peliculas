@@ -1,7 +1,7 @@
 import { Form, Formik, FormikHelpers } from "formik";
 import { Link } from "react-router-dom";
 import Button from "../Utils/Button";
-import Input from "../Utils/Input";
+import FormGroupTextBox from "../Utils/FormGroupTextBox";
 import actorCrearDTO from "./Actor.model";
 import * as Yup from "yup";
 import FormGroupFecha from "../Utils/FormGroupFecha";
@@ -22,7 +22,7 @@ export default function FormularioActores(props: formularioActoresProps){
             >
                 {(formikProps) => (
                     <Form>
-                        <Input name="nombre" label="Nombre"/>
+                        <FormGroupTextBox name="nombre" label="Nombre"/>
                         <FormGroupFecha label="Fecha de Nacimiento" name="fechaNacimiento" />
                         <FormGroupImagen name="foto" label="Foto" imagenURL={props.modelo.fotoUrl}/>
                         <FormGroupMarkDown name="biografia" label ="Biografia"/>

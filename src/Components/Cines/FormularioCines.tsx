@@ -1,13 +1,23 @@
 import { Form, FormikHelpers, Formik } from "formik"
 import CinesCreacionDTO from "./Cines.model"
 import * as Yup from 'yup'
-import Input from "../Utils/Input"
+import FormGroupTextBox from "../Utils/FormGroupTextBox"
 import Button from "../Utils/Button"
 import { Link } from "react-router-dom"
-import Mapa from "../Utils/Mapa"
+import MapaFormulario from "../Utils/MapaFormulario"
+import CoordenadaDTO from "../Utils/coordenadas.model"
 
 export default function FormularioCines(props: formularioCinesProps){
 
+    function transformarCoordenadas():CoordenadaDTO[] | undefined {
+        if(props.modelo.latitud && props.modelo.longitud){
+
+            const respuesta: CoordenadaDTO = {lat:props.modelo.latitud, lng:props.modelo.longitud}
+            return [respuesta];
+        }
+
+        return undefined;
+    }
     return(
         <>
             <Formik
@@ -19,10 +29,10 @@ export default function FormularioCines(props: formularioCinesProps){
             >
                 {(formikProps) =>(
                     <Form>
-                        <Input name="nombre" label="Nombre" />
+                        <FormGroupTextBox name="nombre" label="Nombre" />
 
                         <div style={{marginBottom: '1rem'}}>
-                            <Mapa />
+                            <MapaFormulario coordenadas={transformarCoordenadas()} campoLat={"latitud"} campoLng={"longitud"} />
                         </div>
 
                         <Button type="submit" disabled={formikProps.isSubmitting}>Guardar</Button>
